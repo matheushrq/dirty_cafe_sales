@@ -16,9 +16,9 @@ class Analise:
         # Atribuindo o item menos frequente aos dados com erro
         self.df.loc[self.df['Item'].isin(['ERROR', 'UNKNOWN']), 'Item'] = item_menos_frequente
 
-        # Buscando dados nulos
+        # Buscando dados nulos e preenchendo sem usar 'inplace' para evitar warnings
         item_mais_frequente = self.df['Item'].value_counts().idxmax()
-        self.df['Item'].fillna(item_mais_frequente, inplace=True)
+        self.df['Item'] = self.df['Item'].fillna(item_mais_frequente)
 
     def corrige_coluna_payment_method(self):
 
@@ -28,7 +28,7 @@ class Analise:
 
         # Buscando dados nulos e atribuindo o item menos frequente a eles
         pag_menos_frequente = self.df['Payment Method'].value_counts().idxmin()
-        self.df['Payment Method'].fillna(pag_menos_frequente, inplace=True)
+        self.df['Payment Method'] = self.df['Payment Method'].fillna(pag_menos_frequente)
 
     def corrige_transaction_date(self):
 
@@ -46,7 +46,8 @@ class Analise:
         self.df.loc[self.df['Location'] == 'ERROR', 'Location'] = local_mais_frequente
         self.df.loc[self.df['Location'] == 'UNKNOWN', 'Location'] = local_menos_frequente
 
-        self.df['Location'].fillna('Other', inplace=True)
+        # Preencher valores nulos sem 'inplace' para evitar chained-assignment warnings
+        self.df['Location'] = self.df['Location'].fillna('Other')
 
     def corrige_coluna_quantity(self):
 
