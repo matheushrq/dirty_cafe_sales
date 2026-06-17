@@ -13,5 +13,7 @@ def main():
     analise.corrige_coluna_price()
     analise.corrige_coluna_total_spent()
 
+    gera_novo_csv(analise.df, 'pronto/clean_cafe_sales.csv')
+
 if __name__ == "__main__":
     main()
