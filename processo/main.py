@@ -1,4 +1,4 @@
-from dados import ler_csv
+from dados import ler_csv, gera_novo_csv
 from analise import Analise
 
 def main():
