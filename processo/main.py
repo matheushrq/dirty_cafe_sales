@@ -1,6 +1,5 @@
 from dados import ler_csv
 from analise import Analise
-from processo import analise
 
 def main():
     df = ler_csv()
