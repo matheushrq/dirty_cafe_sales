@@ -10,4 +10,9 @@ def ler_csv():
     return df
 
 def gera_novo_csv(df, nome_arquivo):
-    df.to_csv(nome_arquivo, index=False)
+    try:
+        caminho = BASE_DIR / 'pronto' / nome_arquivo
+        df.to_csv(caminho, index=False)
+        print(f"Arquivo '{nome_arquivo}' gerado com sucesso em: {caminho}")
+    except Exception as e:
+        print(f"Erro ao gerar o arquivo '{nome_arquivo}': {e}")
